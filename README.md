@@ -4,7 +4,7 @@
 * [Usage](#Usage)
 * [Features](#Features)
 
-## FoodAholic
+## Campground
 Campground is where all campers around the world meet and share their campground they came to. Also I would like to sharpen my web development skills through JavaScript, MEN stack, RESTful routing, and Bootstrap.
 
 View this project live [HERE](https://camp-mern.web.app/)
