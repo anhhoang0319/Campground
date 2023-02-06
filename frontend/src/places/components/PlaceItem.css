@@ -58,3 +58,12 @@
     height: 20rem;
   } 
 }
+
+.place-item__likes {
+  display: flex;
+  align-items: center;
+}
+
+.place-item__likeCounter {
+  font-size: 15px;
+}

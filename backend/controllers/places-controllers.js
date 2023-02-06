@@ -93,6 +93,7 @@ const createPlace = async (req, res, next) => {
     address,
     location: coordinates,
     image: req.file.path,
+    imageId: req.file.filename,
     creator: req.userData.userId
   });
 
@@ -162,6 +163,8 @@ const updatePlace = async (req, res, next) => {
   place.title = title;
   place.description = description;
 
+  
+
   try {
     await place.save();
   } catch (err) {
@@ -171,9 +174,35 @@ const updatePlace = async (req, res, next) => {
     );
     return next(error);
   }
+  
 
   res.status(200).json({ place: place.toObject({ getters: true }) });
 };
+
+
+const updateLike = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(
+      new HttpError('Invalid inputs, please check your data.', 422)
+    );
+  }
+
+  let place;
+  try {
+    place = await Place.findById(req.params.id);
+    if (!place.like.includes(req.body.userId)) {
+      await place.updateOne({ $push: { like: req.body.userId } });
+      res.send(place.like.length);
+    } else {
+      await place.updateOne({ $pull: { like: req.body.userId } });
+      res.send(place.like.length);
+    }
+  } catch (err) {
+    res.send({ message: "error" });
+  }
+};
+
 
 const deletePlace = async (req, res, next) => {
   const placeId = req.params.pid;
@@ -202,8 +231,8 @@ const deletePlace = async (req, res, next) => {
     return next(error);
   }
 
-  const imagePath = place.image;
 
+  const imagePath = place.image;
 
   try {
     const sess = await mongoose.startSession();
@@ -230,3 +259,5 @@ exports.getPlacesByUserId = getPlacesByUserId;
 exports.createPlace = createPlace;
 exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;
+
+exports.updateLike = updateLike;

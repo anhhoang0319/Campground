@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+
+// import axios from 'axios';
 
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
@@ -10,11 +12,30 @@ import { AuthContext } from '../../shared/context/auth-context';
 import { useHttpClient } from '../../shared/hooks/http-hook';
 import './PlaceItem.css';
 
+import { Favorite } from "@mui/icons-material";
+
+
 const PlaceItem = props => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const auth = useContext(AuthContext);
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+
+
+  // const [like, setLike] = useState(props.like.length);
+  // const [isLiked, setIsLiked] = useState(false);
+  // useEffect(() => {
+  //   setIsLiked(props.like.includes(auth.userId));
+  // }, [auth.userId, props.like]);
+  // const likeHandler = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     axios.put("/api/places/" + props.id + "/like", { userId: auth.userId });
+  //   } catch (err) {}
+  //   setLike(isLiked ? like - 1 : like + 1);
+  //   setIsLiked(!isLiked);
+  // };
+
 
   const openMapHandler = () => setShowMap(true);
 
@@ -99,6 +120,17 @@ const PlaceItem = props => {
             {auth.userId === props.creatorId && (
               <Button to={`/places/${props.id}`}>EDIT</Button>
             )}
+
+
+              <div className="place-item__likes">
+            <Button className="place-item__likeIcon" 
+            startIcon={<Favorite />}
+            onClick={likeHandler}
+            style={{ color: isLiked ? "#E33A15" : "#C4C4C4"}}
+            />
+            <span className="place-item__likeCounter">{like}</span>
+            </div>
+
 
             {auth.userId === props.creatorId && (
               <Button danger onClick={showDeleteWarningHandler}>

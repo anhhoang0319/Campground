@@ -39,6 +39,8 @@ router.patch(
   placesControllers.updatePlace
 );
 
+router.put(':pid/like', placesControllers.updateLike);
+
 router.delete('/:pid', placesControllers.deletePlace);
 
 module.exports = router;
