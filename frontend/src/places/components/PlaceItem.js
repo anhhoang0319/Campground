@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 
-// import axios from 'axios';
+import axios from 'axios';
 
 import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
@@ -22,19 +22,19 @@ const PlaceItem = props => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
 
 
-  // const [like, setLike] = useState(props.like.length);
-  // const [isLiked, setIsLiked] = useState(false);
-  // useEffect(() => {
-  //   setIsLiked(props.like.includes(auth.userId));
-  // }, [auth.userId, props.like]);
-  // const likeHandler = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     axios.put("/api/places/" + props.id + "/like", { userId: auth.userId });
-  //   } catch (err) {}
-  //   setLike(isLiked ? like - 1 : like + 1);
-  //   setIsLiked(!isLiked);
-  // };
+  const [like, setLike] = useState(props.like.length);
+  const [isLiked, setIsLiked] = useState(false);
+  useEffect(() => {
+    setIsLiked(props.like.includes(auth.userId));
+  }, [auth.userId, props.like]);
+  const likeHandler = async (e) => {
+    e.preventDefault();
+    try {
+      axios.put("/api/places/" + props.id + "/like", { userId: auth.userId });
+    } catch (err) {}
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
 
 
   const openMapHandler = () => setShowMap(true);
