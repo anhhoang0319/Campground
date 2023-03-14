@@ -6,6 +6,7 @@
         "JWT_KEY": "supersecret_dont_share",
         "CLOUDINARY_NAME":"dlzgorlaa",
         "CLOUDINARY_API_KEY":"652953981623573",
-        "CLOUDINARY_API_SECRET":"cu0F-6ohaJdH23Ixcp1RSYZTpww"
+        "CLOUDINARY_API_SECRET":"cu0F-6ohaJdH23Ixcp1RSYZTpww",
+        "PORT": "5000"
     }
 }
