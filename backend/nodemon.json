@@ -1,0 +1,11 @@
+{
+    "env":{
+        "DB_USER": "anhhoang0319",
+        "DB_PASSWORD": "oajjzEn0WZwFxxvf",
+        "DB_NAME" : "mern",
+        "JWT_KEY": "supersecret_dont_share",
+        "CLOUDINARY_NAME":"dlzgorlaa",
+        "CLOUDINARY_API_KEY":"652953981623573",
+        "CLOUDINARY_API_SECRET":"cu0F-6ohaJdH23Ixcp1RSYZTpww"
+    }
+}
